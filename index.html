@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+	<meta charset="utf-8"/>
+	<title>svg-radar-chart</title>
+	<meta name="description" content="A reusable radar chart in SVG."/>
+	<meta name="keywords" content="svg,radar,chart,dataviz,visualization"/>
+	<meta name="author" content="Jannis R <mail@jannisr.de>"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1"/>
+	<style>
+		body {
+			margin: 0; padding: 0;
+			background-color: white;
+			font-family: sans-serif;
+			font-weight: 300;
+			/*todo: system sans-serif font*/
+			font-size: 105%;
+		}
+
+		h1, h2, p {
+			margin: 1rem 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: #cc333f;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+
+		code, pre {
+			padding: .15em .25em;
+			background-color: #ccc;
+			border: 1px solid #bbb;
+			border-radius: .15em;
+		}
+		pre {
+			padding: .5em;
+			text-align: left;
+			line-height: 1.25;
+			overflow-x: scroll;
+		}
+		pre code {
+			padding: 0;
+			background-color: unset;
+			border: none;
+			border-radius: 0;
+		}
+
+		select {
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		textarea {
+			padding: .5em;
+			width: 100%;
+			box-sizing: border-box;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: .15em;
+		}
+
+		.grid {
+			display: flex;
+		}
+		.grid > .cell {
+			flex-basis: 50%;
+			padding: 1rem .5rem;
+		}
+		.grid > .cell.alpha {
+			padding-left: 0;
+		}
+		.grid > .cell.omega {
+			padding-right: 0;
+		}
+
+		.section {
+			margin: 0 auto;
+			padding: 2rem 1rem;
+			max-width: 42rem;
+			text-align: center;
+		}
+
+		#intro {
+			padding-top: 4rem;
+			padding-bottom: 4rem;
+		}
+		#intro-name {
+			font-size: 300%;
+			margin-bottom: 3rem;
+		}
+		#intro-name code {
+			padding: 0;
+			color: #cc333f;
+			background-color: inherit;
+			border: inherit;
+		}
+
+		#intro-github {
+			display: inline-block;
+			margin: 2rem auto 0 auto;
+		}
+		#intro-github path {
+			fill: #00a0b0;
+		}
+		#intro-github:hover path {
+			opacity: .7;
+		}
+
+		#demo {
+			max-width: inherit;
+			background-color: #f0f0f0;
+		}
+		#demo .cell.alpha {
+			text-align: right;
+		}
+		#demo .cell.omega {
+			display: flex;
+			flex-direction: column;
+			text-align: left;
+		}
+
+		#demo-target {
+			width: 30rem;
+			max-width: 100%;
+		}
+		#demo-target .axis {
+			stroke: #555;
+			stroke-width: .2;
+		}
+		#demo-target .scale {
+			fill: #f0f0f0;
+			stroke: #999;
+			stroke-width: .2;
+		}
+		#demo-target .shape {
+			fill-opacity: .3;
+			stroke-width: .5;
+		}
+		#demo-target:hover .shape {
+			fill-opacity: .1;
+		}
+		#demo-target .shape:hover, #demo-target:hover .shape:hover {
+			fill-opacity: .6;
+		}
+
+		#demo-type {
+			max-width: 20rem;
+		}
+		#demo-options {
+			flex-grow: 1;
+			margin-top: 1rem;
+			max-width: 20rem;
+			color: #fdf5e6;
+			border-color: #fdf5e6;
+			background-color: unset;
+		}
+
+		#footer .love {
+			font-size: 150%;
+			color: #e74c3c;
+		}
+	</style>
+</head><body>
+	<div id="intro" class="section">
+		<h1 id="intro-name"><code>svg-radar-chart</code></h1>
+		<p><strong>A reusable radar chart in SVG.</strong></p>
+		<p><a href="https://d3js.org/">D3</a> is not required. <code>3k</code> minified &amp; gzipped.</p>
+		<!-- https://github.com/github/octicons/blob/0640e0c0e555a02e4628b96d5e72ef3328f27214/svg/mark-github.svg -->
+		<a id="intro-github" href="https://github.com/derhuerst/svg-radar-chart">
+			<svg height="32" width="32" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+				<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"/>
+			</svg>
+		</a>
+	</div>
+	<div id="demo" class="section">
+		<div class="grid">
+			<div class="cell alpha">
+				<svg id="demo-target" version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"/>
+			</div>
+			<div class="cell omega">
+				<textarea id="demo-columns">{
+	foo: 'Foo!', bar: 'Bar?', baz: 'Baz.', qux: 'Qux;', qax: 'Qax!'
+}</textarea>
+				<textarea id="demo-data">[
+	{color: '#edc951', foo: .33, bar: .66, baz: 1,   qux: 1,   qax: .33},
+	{color: '#cc333f', foo: .66, bar: 1,   baz: .66, qux: .66, qax: .66},
+	{color: '#00a0b0', foo: 1,   bar: .66, baz: .33, qux: .33, qax: 1  }
+]</textarea>
+				<label for="demo-scales">
+					<span>scales</span>
+					<input type="number" min="0" max="10" step="1" id="demo-scales" value="3"/>
+				</label>
+				<label for="demo-axers">
+					<span>axes</span>
+					<input type="checkbox" id="demo-axes" checked/>
+				</label>
+			</div>
+		</div>
+	</div>
+	<footer id="footer" class="section">
+		<p><a href="https://github.com/derhuerst/svg-radar-chart"><abbr title="Free Open Source Software">FOSS</abbr></a> made with <span class="love">❤</span> by <a href="http://jannisr.de">@derhuerst</a>.</p>
+	</footer>
+	<script src="bundle.min.js"></script>
+</body></html>
