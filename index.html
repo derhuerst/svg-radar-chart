@@ -10,9 +10,10 @@
 	<style>
 		body {
 			margin: 0; padding: 0;
-			background-color: white;
+			background-color: #cc333f;
 			font-family: sans-serif;
 			font-weight: 300;
+			color: white;
 			/*todo: system sans-serif font*/
 			font-size: 105%;
 		}
@@ -22,17 +23,13 @@
 		}
 
 		a {
-			text-decoration: none;
-			color: #cc333f;
-		}
-		a:hover {
 			text-decoration: underline;
+			color: white;
 		}
 
 		code, pre {
 			padding: .15em .25em;
-			background-color: #ccc;
-			border: 1px solid #bbb;
+			background-color: #555;
 			border-radius: .15em;
 		}
 		pre {
@@ -77,16 +74,11 @@
 			padding-right: 0;
 		}
 
-		.section {
-			margin: 0 auto;
-			padding: 2rem 1rem;
-			max-width: 42rem;
-			text-align: center;
-		}
-
 		#intro {
 			padding-top: 4rem;
 			padding-bottom: 4rem;
+			padding: 2rem 1rem;
+			text-align: center;
 		}
 		#intro-name {
 			font-size: 300%;
@@ -94,7 +86,8 @@
 		}
 		#intro-name code {
 			padding: 0;
-			color: #cc333f;
+			color: #edc951;
+			font-weight: 300;
 			background-color: inherit;
 			border: inherit;
 		}
@@ -104,14 +97,14 @@
 			margin: 2rem auto 0 auto;
 		}
 		#intro-github path {
-			fill: #00a0b0;
+			fill: #edc951;
 		}
 		#intro-github:hover path {
 			opacity: .7;
 		}
 
 		#demo {
-			max-width: inherit;
+			padding: 2rem 1rem;
 			background-color: #f0f0f0;
 		}
 		#demo .cell.alpha {
@@ -123,6 +116,22 @@
 			text-align: left;
 		}
 
+		#demo-options {
+			color: #333;
+		}
+		#demo-options > *{
+			margin-top: 1rem;
+			max-width: 30rem;
+		}
+		#demo-options > textarea{
+			flex-grow: 1;
+			color: white;
+			font-family: monospace;
+			font-size: 97%;
+			border-color: #666;
+			background-color: #777;
+		}
+
 		#demo-target {
 			width: 30rem;
 			max-width: 100%;
@@ -132,7 +141,7 @@
 			stroke-width: .2;
 		}
 		#demo-target .scale {
-			fill: #f0f0f0;
+			fill: #e7e7e7;
 			stroke: #999;
 			stroke-width: .2;
 		}
@@ -147,16 +156,10 @@
 			fill-opacity: .6;
 		}
 
-		#demo-type {
-			max-width: 20rem;
-		}
-		#demo-options {
-			flex-grow: 1;
-			margin-top: 1rem;
-			max-width: 20rem;
-			color: #fdf5e6;
-			border-color: #fdf5e6;
-			background-color: unset;
+		#footer {
+			padding: 2rem 1rem;
+			text-align: center;
+			background-color: #00a0b0;
 		}
 
 		#footer .love {
@@ -165,7 +168,7 @@
 		}
 	</style>
 </head><body>
-	<div id="intro" class="section">
+	<div id="intro">
 		<h1 id="intro-name"><code>svg-radar-chart</code></h1>
 		<p><strong>A reusable radar chart in SVG.</strong></p>
 		<p><a href="https://d3js.org/">D3</a> is not required. <code>3k</code> minified &amp; gzipped.</p>
@@ -176,19 +179,47 @@
 			</svg>
 		</a>
 	</div>
-	<div id="demo" class="section">
+	<div id="demo">
 		<div class="grid">
 			<div class="cell alpha">
-				<svg id="demo-target" version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"/>
+				<svg id="demo-target"
+					version="1" xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 120 100"/>
 			</div>
-			<div class="cell omega">
+			<div id="demo-options" class="cell omega">
 				<textarea id="demo-columns">{
-	foo: 'Foo!', bar: 'Bar?', baz: 'Baz.', qux: 'Qux;', qax: 'Qax!'
+	price: 'Price',
+	useful: 'Usefulness',
+	design: 'Design',
+	battery: 'Battery Capacity',
+	camera: 'Camera Quality'
 }</textarea>
 				<textarea id="demo-data">[
-	{color: '#edc951', foo: .33, bar: .66, baz: 1,   qux: 1,   qax: .33},
-	{color: '#cc333f', foo: .66, bar: 1,   baz: .66, qux: .66, qax: .66},
-	{color: '#00a0b0', foo: 1,   bar: .66, baz: .33, qux: .33, qax: 1  }
+	{
+		// iphone
+		color: '#edc951',
+		price: 1,
+		battery: .7,
+		design: 1,
+		useful: .9,
+		camera: .9
+	}, {
+		// galaxy
+		color: '#cc333f',
+		price: .8,
+		battery: 1,
+		design: .6,
+		useful: .8,
+		camera: 1
+	}, {
+		// nexus
+		color: '#00a0b0',
+		price: .5,
+		battery: .8,
+		design: .7,
+		useful: .6,
+		camera: .6
+	}
 ]</textarea>
 				<label for="demo-scales">
 					<span>scales</span>
@@ -201,7 +232,7 @@
 			</div>
 		</div>
 	</div>
-	<footer id="footer" class="section">
+	<footer id="footer">
 		<p><a href="https://github.com/derhuerst/svg-radar-chart"><abbr title="Free Open Source Software">FOSS</abbr></a> made with <span class="love">❤</span> by <a href="http://jannisr.de">@derhuerst</a>.</p>
 	</footer>
 	<script src="bundle.min.js"></script>
