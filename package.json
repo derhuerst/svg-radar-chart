@@ -10,5 +10,8 @@
 	"repository":   "derhuerst/svg-radar-chart",
 	"bugs":         "https://github.com/derhuerst/svg-radar-chart/issues",
 	"license":      "ISC",
-	"engines":      {"node": ">=6"}
+	"engines":      {"node": ">=6"},
+	"dependencies": {
+		"virtual-dom": "^2.1.1"
+	}
 }
