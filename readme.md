@@ -1,8 +1,8 @@
-# svg-radar-chart
+# [svg-radar-chart](http://jannisr.de/svg-radar-chart/)
 
 **A reusable radar chart in SVG.**
 
-![an example](https://cdn.rawgit.com/derhuerst/svg-radar-chart/master/example.svg)
+![an example](https://rawgit.com/derhuerst/svg-radar-chart/master/example.svg)
 
 [![npm version](https://img.shields.io/npm/v/svg-radar-chart.svg)](https://www.npmjs.com/package/svg-radar-chart)
 [![build status](https://img.shields.io/travis/derhuerst/svg-radar-chart.svg)](https://travis-ci.org/derhuerst/svg-radar-chart)
@@ -24,6 +24,8 @@ npm install svg-radar-chart
 
 
 ## Usage
+
+Fiddle with this library [on the website](http://jannisr.de/svg-radar-chart/)!
 
 ```js
 const radar = require('svg-radar-chart')
@@ -63,7 +65,7 @@ process.stdout.write(`
 `)
 ```
 
-[The example how to customize the chart further](example.js).
+Check [the example on how to customize the chart further](example.js).
 
 
 ## API
