@@ -31,25 +31,19 @@ const axis = (opt) => (column) =>
 		])
 	})
 
-const spoke = (columns, opt) => (data) =>
+const shape = (columns, opt) => (data) =>
 	h('polygon', {
-		className: opt.spokeClassName,
-		points: points(
-			Object.keys(data).map((key) => {
-				const value = data[key]
-				const angle = columns[key].angle
-				return [
-					polarToX(angle, value * opt.size / 2 * opt.maxSpokeSize),
-					polarToY(angle, value * opt.size / 2 * opt.maxSpokeSize)
-				]
-			})
-		)
+		className: opt.shapeClassName,
+		points: points(columns.map((col) => [
+			polarToX(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize),
+			polarToY(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize)
+		]))
 	})
 
 const scale = (opt, value) =>
 	h('circle', {
 		className: opt.scaleClassName,
-		cx: 0, cy: 0, r: value * opt.size / 2 * opt.maxSpokeSize
+		cx: 0, cy: 0, r: value * opt.size / 2 * opt.maxShapeSize
 	})
 
 const defaults = {
@@ -58,8 +52,8 @@ const defaults = {
 	axisClassName: 'axis',
 	scales: 3,
 	scaleClassName: 'scale',
-	spokeClassName: 'spoke',
-	maxSpokeSize: .9
+	shapeClassName: 'shape',
+	maxShapeSize: .9
 }
 
 const render = (columns, data, opt = {}) => {
@@ -80,12 +74,12 @@ const render = (columns, data, opt = {}) => {
 	}, columns)
 
 	const groups = [
-		h('g', data.map(spoke(columns, opt)))
+		h('g', data.map(shape(columns, opt)))
 	]
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))))
 	if (opt.scales > 0) {
 		const scales = []
-		for (let i = 1; i <= opt.scales; i++)
+		for (let i = opt.scales; i > 0; i--)
 			scales.push(scale(opt, i / opt.scales))
 		groups.unshift(h('g', scales))
 	}
