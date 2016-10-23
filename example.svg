@@ -1,0 +1,24 @@
+
+<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+	<style>
+		.axis {
+			stroke: #555;
+			stroke-width: .2;
+		}
+		.scale {
+			fill: #f0f0f0;
+			stroke: #999;
+			stroke-width: .2;
+		}
+		.shape {
+			fill-opacity: .3;
+			stroke-width: .5;
+		}
+		.shape:hover { fill-opacity: .6; }
+
+		.shape.iphone { fill: #edc951; stroke: #edc951; }
+		.shape.nexus  { fill: #cc333f; stroke: #cc333f; }
+		.shape.galaxy { fill: #00a0b0; stroke: #00a0b0; }
+	</style>
+	<g transform="translate(50,50)"><g><circle class="scale" fill="none" r="47.5"></circle><circle class="scale" fill="none" r="31.66666666666666"></circle><circle class="scale" fill="none" r="15.83333333333333"></circle></g><g><polyline class="axis" points="0,0 0,-50"></polyline><polyline class="axis" points="0,0 50,0"></polyline><polyline class="axis" points="0,0 0,50"></polyline><polyline class="axis" points="0,0 -50,0"></polyline></g><g><polygon class="shape iphone" points="0,-47.5 42.75,0 0,47.5 -33.25,0"></polygon><polygon class="shape galaxy" points="0,-38 38,0 0,28.5 -47.5,0"></polygon><polygon class="shape nexus" points="0,-23.75 28.5,0 0,33.25 -38,0"></polygon></g></g>
+</svg>

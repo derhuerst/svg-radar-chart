@@ -44,13 +44,13 @@ const scale = (opt, value) =>
 	}))
 
 const defaults = {
-	size: 100,
-	axes: true,
+	size: 100, // size of the whole chart
+	axes: true, // show axes?
+	scales: 3, // show scale circles?
+	maxShapeSize: .9, // where on the axes is the value 1?
 	axisProps: () => ({className: 'axis'}),
-	scales: 3,
 	scaleProps: () => ({className: 'scale', fill: 'none'}),
-	shapeProps: () => ({className: 'shape'}),
-	maxShapeSize: .9
+	shapeProps: () => ({className: 'shape'})
 }
 
 const render = (columns, data, opt = {}) => {
