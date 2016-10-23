@@ -20,29 +20,47 @@ const polarToY = (angle, distance) =>
 
 
 
-const axis = (column) =>
+const axis = (opt) => (column) =>
 	h('polyline', {
-		className: 'axis',
+		className: opt.axisClassName,
 		points: points([
-			[0, 0],
-			[polarToX(column.angle, 50), polarToY(column.angle, 50)]
+			[0, 0], [
+				polarToX(column.angle, opt.size / 2),
+				polarToY(column.angle, opt.size / 2)
+			]
 		])
 	})
 
-const spoke = (columns) => (data) =>
+const spoke = (columns, opt) => (data) =>
 	h('polygon', {
-		className: 'spoke',
+		className: opt.spokeClassName,
 		points: points(
-			Object.keys(data)
-			.map((key) => {
+			Object.keys(data).map((key) => {
 				const value = data[key]
 				const angle = columns[key].angle
-				return [polarToX(angle, value * 50), polarToY(angle, value * 50)]
+				return [
+					polarToX(angle, value * opt.size / 2 * opt.maxSpokeSize),
+					polarToY(angle, value * opt.size / 2 * opt.maxSpokeSize)
+				]
 			})
 		)
 	})
 
-const render = (columns, data) => {
+const defaults = {
+	size: 100,
+	axes: true,
+	axisClassName: 'axis',
+	spokeClassName: 'spoke',
+	maxSpokeSize: .9
+}
+
+const render = (columns, data, opt = {}) => {
+	if ('object' !== typeof columns || Array.isArray(columns))
+		throw new Error('columns must be an object')
+	if (!Array.isArray(data))
+		throw new Error('data must be an array')
+	opt = Object.assign({}, defaults, opt)
+
 	columns = Object.keys(columns)
 		.map((key, i, all) => ({
 			key, caption: columns[key],
@@ -53,10 +71,13 @@ const render = (columns, data) => {
 		return all
 	}, columns)
 
-	return h('g', [
-		h('g', columns.map(axis)),
-		h('g', data.map(spoke(columns)))
-	])
+	const groups = [
+		h('g', data.map(spoke(columns, opt)))
+	]
+	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))))
+	return h('g', {
+		transform: `translate(${round(opt.size / 2)},${round(opt.size / 2)})`
+	}, groups)
 }
 
 module.exports = render
