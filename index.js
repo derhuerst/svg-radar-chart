@@ -46,10 +46,18 @@ const spoke = (columns, opt) => (data) =>
 		)
 	})
 
+const scale = (opt, value) =>
+	h('circle', {
+		className: opt.scaleClassName,
+		cx: 0, cy: 0, r: value * opt.size / 2 * opt.maxSpokeSize
+	})
+
 const defaults = {
 	size: 100,
 	axes: true,
 	axisClassName: 'axis',
+	scales: 3,
+	scaleClassName: 'scale',
 	spokeClassName: 'spoke',
 	maxSpokeSize: .9
 }
@@ -75,6 +83,12 @@ const render = (columns, data, opt = {}) => {
 		h('g', data.map(spoke(columns, opt)))
 	]
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))))
+	if (opt.scales > 0) {
+		const scales = []
+		for (let i = 1; i <= opt.scales; i++)
+			scales.push(scale(opt, i / opt.scales))
+		groups.unshift(h('g', scales))
+	}
 	return h('g', {
 		transform: `translate(${round(opt.size / 2)},${round(opt.size / 2)})`
 	}, groups)
