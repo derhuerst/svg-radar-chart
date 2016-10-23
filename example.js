@@ -8,19 +8,20 @@ const chart = radar({
 	price: 'Price',
 	useful: 'Usefulness',
 	design: 'Design',
-	battery: 'Battery Capacity'
+	battery: 'Battery Capacity',
+	camera: 'Camera Quality'
 }, [
 	// data
-	{class: 'iphone', price:  1, battery: .7, design:  1, useful: .9},
-	{class: 'galaxy', price: .8, battery:  1, design: .6, useful: .8},
-	{class: 'nexus',  price: .5, battery: .8, design: .7, useful: .6}
+	{class: 'iphone', price:  1, battery: .7, design:  1, useful: .9, camera: .9},
+	{class: 'galaxy', price: .8, battery:  1, design: .6, useful: .8, camera:  1},
+	{class: 'nexus',  price: .5, battery: .8, design: .7, useful: .6, camera: .6}
 ], {
 	maxShapeSize: .95,
 	shapeProps: (data) => ({className: 'shape ' + data.class})
 })
 
 process.stdout.write(`
-<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg version="1" xmlns="http://www.w3.org/2000/svg" width="1000" height="200" viewBox="-200 0 500 100">
 	<style>
 		.axis {
 			stroke: #555;

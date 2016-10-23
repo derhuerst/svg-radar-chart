@@ -1,5 +1,5 @@
 
-<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg version="1" xmlns="http://www.w3.org/2000/svg" width="1000" height="200" viewBox="-200 0 500 100">
 	<style>
 		.axis {
 			stroke: #555;
@@ -20,5 +20,5 @@
 		.shape.nexus  { fill: #cc333f; stroke: #cc333f; }
 		.shape.galaxy { fill: #00a0b0; stroke: #00a0b0; }
 	</style>
-	<g transform="translate(50,50)"><g><circle class="scale" fill="none" r="47.5"></circle><circle class="scale" fill="none" r="31.66666666666666"></circle><circle class="scale" fill="none" r="15.83333333333333"></circle></g><g><polyline class="axis" points="0,0 0,-50"></polyline><polyline class="axis" points="0,0 50,0"></polyline><polyline class="axis" points="0,0 0,50"></polyline><polyline class="axis" points="0,0 -50,0"></polyline></g><g><polygon class="shape iphone" points="0,-47.5 42.75,0 0,47.5 -33.25,0"></polygon><polygon class="shape galaxy" points="0,-38 38,0 0,28.5 -47.5,0"></polygon><polygon class="shape nexus" points="0,-23.75 28.5,0 0,33.25 -38,0"></polygon></g></g>
+	<g transform="translate(50,50)"><g><circle class="scale" fill="none" r="47.5"></circle><circle class="scale" fill="none" r="31.66666666666666"></circle><circle class="scale" fill="none" r="15.83333333333333"></circle></g><g><polyline class="axis" points="0,0 0,-50"></polyline><polyline class="axis" points="0,0 47.5528,-15.4508"></polyline><polyline class="axis" points="0,0 29.3893,40.4508"></polyline><polyline class="axis" points="0,0 -29.3893,40.4508"></polyline><polyline class="axis" points="0,0 -47.5528,-15.4508"></polyline></g><g><polygon class="shape iphone" points="0,-47.5 40.6577,-13.2105 27.9198,38.4283 -19.5439,26.8998 -40.6577,-13.2105"></polygon><polygon class="shape galaxy" points="0,-38 36.1401,-11.7426 16.7519,23.057 -27.9198,38.4283 -45.1752,-14.6783"></polygon><polygon class="shape nexus" points="0,-23.75 27.1051,-8.807 19.5439,26.8998 -22.3358,30.7426 -27.1051,-8.807"></polygon></g></g>
 </svg>
