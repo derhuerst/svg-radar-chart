@@ -25,8 +25,6 @@ npm install svg-radar-chart
 
 ## Usage
 
-Fiddle with this library [on the website](http://jannisr.de/svg-radar-chart/)!
-
 ```js
 const radar = require('svg-radar-chart')
 const stringify = require('virtual-dom-stringify')
@@ -65,7 +63,18 @@ process.stdout.write(`
 `)
 ```
 
-Check [the example on how to customize the chart further](example.js).
+Check [the website](http://jannisr.de/svg-radar-chart/) or [the example](example.js) on how to customize charts further.
+
+### Smoothing
+
+You can pass the [cardinal-closed smoothing function](https://github.com/d3/d3-shape/blob/master/README.md#curveCardinalClosed) as follows, but it will add another `14k` to your bundle.
+
+```js
+const smoothing = require('svg-radar-chart/smoothing')
+radar(columns, data, {
+	smoothing: smoothing(.3) // tension of .3
+})
+```
 
 
 ## API
@@ -86,11 +95,14 @@ radar(columns, data, [opt])
 	axes: true, // show axes?
 	scales: 3, // show scale circles?
 	maxShapeSize: .9, // where on the axes is the value 1?
+	smoothing: noSmoothing, // shape smoothing function
 	axisProps: () => ({className: 'axis'}),
 	scaleProps: () => ({className: 'scale', fill: 'none'}),
 	shapeProps: () => ({className: 'shape'})
 }
 ```
+
+`smoothing(points)` must return [valid SVG `<path>` commands](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d).
 
 
 ## Contributing

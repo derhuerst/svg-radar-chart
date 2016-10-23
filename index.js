@@ -8,15 +8,22 @@ const h = require('virtual-dom/h')
 
 const round = (v) => Math.round(v * 10000) / 10000
 
-const points = (points) => points
-	.map((point) => round(point[0]) + ',' + round(point[1]))
-	.join(' ')
-
 const polarToX = (angle, distance) =>
 	Math.cos(angle - Math.PI / 2) * distance
 
 const polarToY = (angle, distance) =>
 	Math.sin(angle - Math.PI / 2) * distance
+
+const points = (points) => points
+	.map((point) => round(point[0]) + ',' + round(point[1]))
+	.join(' ')
+
+const noSmoothing = (points) => {
+	let d = 'M' + points[0][0] + ',' + points[0][1]
+	for (let i = 1; i < points.length; i++)
+		d += 'L' + points[i][0] + ',' + points[i][1]
+	return d + 'z'
+}
 
 
 
@@ -31,8 +38,8 @@ const axis = (opt) => (column) =>
 	}))
 
 const shape = (columns, opt) => (data) =>
-	h('polygon', Object.assign(opt.shapeProps(data), {
-		points: points(columns.map((col) => [
+	h('path', Object.assign(opt.shapeProps(data), {
+		d: opt.smoothing(columns.map((col) => [
 			polarToX(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize),
 			polarToY(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize)
 		]))
@@ -48,6 +55,7 @@ const defaults = {
 	axes: true, // show axes?
 	scales: 3, // show scale circles?
 	maxShapeSize: .9, // where on the axes is the value 1?
+	smoothing: noSmoothing, // shape smoothing function
 	axisProps: () => ({className: 'axis'}),
 	scaleProps: () => ({className: 'scale', fill: 'none'}),
 	shapeProps: () => ({className: 'shape'})
