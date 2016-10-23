@@ -3,6 +3,7 @@
 const safeEval = require('safe-eval')
 const toHTML = require('virtual-dom-stringify')
 const radar = require('.')
+const smoothing = require('./smoothing')
 
 
 
@@ -10,6 +11,7 @@ const columns = document.querySelector('#demo-columns')
 const data = document.querySelector('#demo-data')
 const scales = document.querySelector('#demo-scales')
 const axes = document.querySelector('#demo-axes')
+const tension = document.querySelector('#demo-smoothing')
 
 const opt = {
 	shapeProps: (data) => ({
@@ -24,8 +26,10 @@ const render = () => {
 	const d = safeEval(data.value)
 	const s = +scales.value
 	const a = axes.checked
+	const sm = +tension.value
 
 	document.querySelector('#demo-target').innerHTML = toHTML(radar(c, d, {
+		smoothing: smoothing(sm),
 		scales: s, axes: a,
 		shapeProps: (data) => ({
 			className: 'shape',
@@ -42,4 +46,5 @@ data.addEventListener('change', render)
 data.addEventListener('keypress', asyncRender)
 scales.addEventListener('change', render)
 axes.addEventListener('change', render)
+tension.addEventListener('change', render)
 asyncRender()

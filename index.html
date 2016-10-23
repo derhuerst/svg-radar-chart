@@ -131,6 +131,12 @@
 			border-color: #666;
 			background-color: #777;
 		}
+		#demo-columns {
+			min-height: 8em;
+		}
+		#demo-data {
+			min-height: 16em;
+		}
 
 		#demo-target {
 			width: 30rem;
@@ -225,9 +231,13 @@
 					<span>scales</span>
 					<input type="number" min="0" max="10" step="1" id="demo-scales" value="3"/>
 				</label>
-				<label for="demo-axers">
+				<label for="demo-axes">
 					<span>axes</span>
 					<input type="checkbox" id="demo-axes" checked/>
+				</label>
+				<label for="demo-smoothing">
+					<span>smoothing</span>
+					<input type="number" min="0" max="1" step="0.1" id="demo-smoothing" value="0.6"/>
 				</label>
 			</div>
 		</div>

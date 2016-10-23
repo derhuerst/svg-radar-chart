@@ -24,7 +24,7 @@
 		"uglify-js": "^2.7.3"
 	},
 	"scripts": {
-		"bundle": "browserify -t [ babelify --presets es2015 ] demo.js > bundle.js",
+		"bundle": "browserify -g [ babelify --presets es2015 ] demo.js > bundle.js",
 		"minify": "uglifyjs -mc --screw-ie8 -- bundle.js > bundle.min.js",
 		"build": "npm run bundle && npm run minify",
 		"dev": "browserify demo.js > bundle.min.js"
