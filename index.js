@@ -21,38 +21,35 @@ const polarToY = (angle, distance) =>
 
 
 const axis = (opt) => (column) =>
-	h('polyline', {
-		className: opt.axisClassName,
+	h('polyline', Object.assign(opt.axisProps(column), {
 		points: points([
 			[0, 0], [
 				polarToX(column.angle, opt.size / 2),
 				polarToY(column.angle, opt.size / 2)
 			]
 		])
-	})
+	}))
 
 const shape = (columns, opt) => (data) =>
-	h('polygon', {
-		className: opt.shapeClassName,
+	h('polygon', Object.assign(opt.shapeProps(data), {
 		points: points(columns.map((col) => [
 			polarToX(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize),
 			polarToY(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize)
 		]))
-	})
+	}))
 
 const scale = (opt, value) =>
-	h('circle', {
-		className: opt.scaleClassName,
+	h('circle', Object.assign(opt.scaleProps(value), {
 		cx: 0, cy: 0, r: value * opt.size / 2 * opt.maxShapeSize
-	})
+	}))
 
 const defaults = {
 	size: 100,
 	axes: true,
-	axisClassName: 'axis',
+	axisProps: () => ({className: 'axis'}),
 	scales: 3,
-	scaleClassName: 'scale',
-	shapeClassName: 'shape',
+	scaleProps: () => ({className: 'scale', fill: 'none'}),
+	shapeProps: () => ({className: 'shape'}),
 	maxShapeSize: .9
 }
 
