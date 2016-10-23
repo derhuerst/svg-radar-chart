@@ -1,0 +1,14 @@
+{
+	"name":         "svg-radar-chart",
+	"description":  "A reusable radar chart in SVG.",
+	"version":      "0.1.0",
+	"main":         "index.js",
+	"files":        ["index.js"],
+	"keywords":     ["svg", "radar", "chart", "dataviz", "visualization"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "http://derhuerst.github.io/svg-radar-chart/",
+	"repository":   "derhuerst/svg-radar-chart",
+	"bugs":         "https://github.com/derhuerst/svg-radar-chart/issues",
+	"license":      "ISC",
+	"engines":      {"node": ">=6"}
+}
