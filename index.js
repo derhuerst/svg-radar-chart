@@ -19,9 +19,9 @@ const points = (points) => points
 	.join(' ')
 
 const noSmoothing = (points) => {
-	let d = 'M' + points[0][0] + ',' + points[0][1]
+	let d = 'M' + round(points[0][0]) + ',' + round(points[0][1])
 	for (let i = 1; i < points.length; i++)
-		d += 'L' + points[i][0] + ',' + points[i][1]
+		d += 'L' + round(points[i][0]) + ',' + round(points[i][1])
 	return d + 'z'
 }
 
