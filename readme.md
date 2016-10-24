@@ -90,15 +90,21 @@ radar(columns, data, [opt])
 `opt` is optional and has the following default values:
 
 ```js
-{
-	size: 100, // size of the whole chart
+const defaults = {
+	size: 100, // size of the chart (including captions)
 	axes: true, // show axes?
 	scales: 3, // show scale circles?
-	maxShapeSize: .9, // where on the axes is the value 1?
+	captions: true, // show captions?
+	captionsPosition: 1.2, // where on the axes are the captions?
 	smoothing: noSmoothing, // shape smoothing function
 	axisProps: () => ({className: 'axis'}),
 	scaleProps: () => ({className: 'scale', fill: 'none'}),
-	shapeProps: () => ({className: 'shape'})
+	shapeProps: () => ({className: 'shape'}),
+	captionProps: () => ({
+		className: 'caption',
+		textAnchor: 'middle', fontSize: 3,
+		fontFamily: 'sans-serif'
+	})
 }
 ```
 

@@ -16,7 +16,6 @@ const chart = radar({
 	{class: 'galaxy', price: .8, battery:  1, design: .6, useful: .8, camera:  1},
 	{class: 'nexus',  price: .5, battery: .8, design: .7, useful: .6, camera: .6}
 ], {
-	maxShapeSize: .95,
 	shapeProps: (data) => ({className: 'shape ' + data.class})
 })
 
