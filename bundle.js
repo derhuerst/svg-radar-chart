@@ -82,16 +82,16 @@ var points = function points(_points) {
 };
 
 var noSmoothing = function noSmoothing(points) {
-	var d = 'M' + points[0][0] + ',' + points[0][1];
+	var d = 'M' + round(points[0][0]) + ',' + round(points[0][1]);
 	for (var i = 1; i < points.length; i++) {
-		d += 'L' + points[i][0] + ',' + points[i][1];
+		d += 'L' + round(points[i][0]) + ',' + round(points[i][1]);
 	}return d + 'z';
 };
 
 var axis = function axis(opt) {
 	return function (column) {
 		return h('polyline', Object.assign(opt.axisProps(column), {
-			points: points([[0, 0], [polarToX(column.angle, opt.size / 2), polarToY(column.angle, opt.size / 2)]])
+			points: points([[0, 0], [polarToX(column.angle, opt.chartSize / 2), polarToY(column.angle, opt.chartSize / 2)]])
 		}));
 	};
 };
@@ -100,7 +100,7 @@ var shape = function shape(columns, opt) {
 	return function (data) {
 		return h('path', Object.assign(opt.shapeProps(data), {
 			d: opt.smoothing(columns.map(function (col) {
-				return [polarToX(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize), polarToY(col.angle, data[col.key] * opt.size / 2 * opt.maxShapeSize)];
+				return [polarToX(col.angle, data[col.key] * opt.chartSize / 2), polarToY(col.angle, data[col.key] * opt.chartSize / 2)];
 			}))
 		}));
 	};
@@ -108,15 +108,26 @@ var shape = function shape(columns, opt) {
 
 var scale = function scale(opt, value) {
 	return h('circle', Object.assign(opt.scaleProps(value), {
-		cx: 0, cy: 0, r: value * opt.size / 2 * opt.maxShapeSize
+		cx: 0, cy: 0, r: value * opt.chartSize / 2
 	}));
 };
 
+var caption = function caption(opt) {
+	return function (col) {
+		return h('text', Object.assign(opt.captionProps(col), {
+			x: round(polarToX(col.angle, opt.size / 2 * .95)),
+			y: round(polarToY(col.angle, opt.size / 2 * .95)),
+			dy: (opt.captionProps(col).fontSize || 2) / 2
+		}), col.caption);
+	};
+};
+
 var defaults = {
-	size: 100, // size of the whole chart
+	size: 100, // size of the chart (including captions)
 	axes: true, // show axes?
 	scales: 3, // show scale circles?
-	maxShapeSize: .9, // where on the axes is the value 1?
+	captions: true, // show captions?
+	captionsPosition: 1.2, // where on the axes are the captions?
 	smoothing: noSmoothing, // shape smoothing function
 	axisProps: function axisProps() {
 		return { className: 'axis' };
@@ -126,6 +137,13 @@ var defaults = {
 	},
 	shapeProps: function shapeProps() {
 		return { className: 'shape' };
+	},
+	captionProps: function captionProps() {
+		return {
+			className: 'caption',
+			textAnchor: 'middle', fontSize: 3,
+			fontFamily: 'sans-serif'
+		};
 	}
 };
 
@@ -135,6 +153,7 @@ var render = function render(columns, data) {
 	if ('object' !== (typeof columns === 'undefined' ? 'undefined' : _typeof(columns)) || Array.isArray(columns)) throw new Error('columns must be an object');
 	if (!Array.isArray(data)) throw new Error('data must be an array');
 	opt = Object.assign({}, defaults, opt);
+	opt.chartSize = opt.size / opt.captionsPosition;
 
 	columns = Object.keys(columns).map(function (key, i, all) {
 		return {
@@ -148,6 +167,7 @@ var render = function render(columns, data) {
 	}, columns);
 
 	var groups = [h('g', data.map(shape(columns, opt)))];
+	if (opt.captions) groups.unshift(h('g', columns.map(caption(opt))));
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))));
 	if (opt.scales > 0) {
 		var scales = [];
