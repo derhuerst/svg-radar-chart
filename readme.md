@@ -111,6 +111,12 @@ const defaults = {
 `smoothing(points)` must return [valid SVG `<path>` commands](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d).
 
 
+## See also
+
+- [`svg-patterns`](https://github.com/derhuerst/svg-patterns) – Create SVG patterns programmatically to visualize data.
+- [`svg-world-map`](https://github.com/derhuerst/svg-world-map) – Render a world map with a pin at a specific location.
+
+
 ## Contributing
 
 If you **have a question**, **found a bug** or want to **propose a feature**, have a look at [the issues page](https://github.com/derhuerst/svg-radar-chart/issues).

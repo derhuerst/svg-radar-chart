@@ -3,7 +3,7 @@
 	"description":  "A reusable radar chart in SVG.",
 	"version":      "0.1.0",
 	"main":         "index.js",
-	"files":        ["index.js"],
+	"files":        ["index.js", "smoothing.js"],
 	"keywords":     ["svg", "radar", "chart", "dataviz", "visualization"],
 	"author":       "Jannis R <mail@jannisr.de>",
 	"homepage":     "http://derhuerst.github.io/svg-radar-chart/",
