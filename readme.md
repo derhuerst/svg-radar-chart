@@ -9,6 +9,7 @@
 [![dependency status](https://img.shields.io/david/derhuerst/svg-radar-chart.svg)](https://david-dm.org/derhuerst/svg-radar-chart)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/svg-radar-chart.svg)](https://david-dm.org/derhuerst/svg-radar-chart#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/svg-radar-chart.svg)
+[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
 
 This library is inspired by [radar-chart-d3](https://github.com/alangrafu/radar-chart-d3) but tries to do a few things differently:
 
@@ -27,7 +28,6 @@ npm install svg-radar-chart
 
 ```js
 const radar = require('svg-radar-chart')
-const stringify = require('virtual-dom-stringify')
 
 const chart = radar({
 	// columns
@@ -40,8 +40,16 @@ const chart = radar({
 	{class: 'galaxy', battery:  1, design: .6, useful: .8},
 	{class: 'nexus',  battery: .8, design: .7, useful: .6}
 ])
+```
 
-process.stdout.write(`
+**`svg-radar-chart` returns [virtual-dom](https://github.com/Matt-Esch/virtual-dom#dom-model), so you can decide what to do with it.**
+
+To generate an SVG string from it:
+
+```js
+const stringify = require('virtual-dom-stringify')
+
+const svg = `
 <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 	<style>
 		.axis {
@@ -56,11 +64,25 @@ process.stdout.write(`
 		.shape {
 			fill-opacity: .3;
 		}
-		.shape:hover { fill-opacity: .6; }
+		.shape:hover {
+			fill-opacity: .6;
+		}
 	</style>
 	${stringify(chart)}
 </svg>
-`)
+`
+```
+
+You may now create an SVG file using Node.js:
+
+```js
+process.stdout.write(svg)
+```
+
+Or insert it into the DOM:
+
+```js
+document.querySelector('#my-chart').innerHTML = svg
 ```
 
 Check [the website](http://jannisr.de/svg-radar-chart/) or [the example](example.js) on how to customize charts further.
