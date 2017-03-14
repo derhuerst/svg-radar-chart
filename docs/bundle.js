@@ -167,7 +167,7 @@ var render = function render(columns, data) {
 	}, columns);
 
 	var groups = [h('g', data.map(shape(columns, opt)))];
-	if (opt.captions) groups.unshift(h('g', columns.map(caption(opt))));
+	if (opt.captions) groups.push(h('g', columns.map(caption(opt))));
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))));
 	if (opt.scales > 0) {
 		var scales = [];

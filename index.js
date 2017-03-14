@@ -97,7 +97,7 @@ const render = (columns, data, opt = {}) => {
 	const groups = [
 		h('g', data.map(shape(columns, opt)))
 	]
-	if (opt.captions) groups.unshift(h('g', columns.map(caption(opt))))
+	if (opt.captions) groups.push(h('g', columns.map(caption(opt))))
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))))
 	if (opt.scales > 0) {
 		const scales = []
