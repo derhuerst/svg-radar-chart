@@ -57,6 +57,8 @@ const caption = (opt) => (col) =>
 		dy: (opt.captionProps(col).fontSize || 2) / 2
 	}), col.caption)
 
+
+
 const defaults = {
 	size: 100, // size of the chart (including captions)
 	axes: true, // show axes?

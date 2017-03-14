@@ -44,7 +44,7 @@ const chart = radar({
 
 **`svg-radar-chart` returns [virtual-dom](https://github.com/Matt-Esch/virtual-dom#dom-model), so you can decide what to do with it.**
 
-To generate an SVG string from it:
+To generate an SVG string from it, use [virtual-dom-stringify](https://github.com/alexmingoia/virtual-dom-stringify):
 
 ```js
 const stringify = require('virtual-dom-stringify')
@@ -53,12 +53,9 @@ const svg = `
 <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 	<style>
 		.axis {
-			stroke: #555;
 			stroke-width: .2;
 		}
 		.scale {
-			fill: #f0f0f0;
-			stroke: #999;
 			stroke-width: .2;
 		}
 		.shape {
