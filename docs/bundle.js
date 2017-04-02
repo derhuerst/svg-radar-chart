@@ -77,15 +77,16 @@ var polarToY = function polarToY(angle, distance) {
 
 var points = function points(_points) {
 	return _points.map(function (point) {
-		return round(point[0]) + ',' + round(point[1]);
+		return point[0].toFixed(4) + ',' + point[1].toFixed(4);
 	}).join(' ');
 };
 
 var noSmoothing = function noSmoothing(points) {
-	var d = 'M' + round(points[0][0]) + ',' + round(points[0][1]);
+	var d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4);
 	for (var i = 1; i < points.length; i++) {
-		d += 'L' + round(points[i][0]) + ',' + round(points[i][1]);
-	}return d + 'z';
+		d += 'L' + points[i][0].toFixed(4) + ',' + points[i][1].toFixed(4);
+	}
+	return d + 'z';
 };
 
 var axis = function axis(opt) {
@@ -115,8 +116,8 @@ var scale = function scale(opt, value) {
 var caption = function caption(opt) {
 	return function (col) {
 		return h('text', Object.assign(opt.captionProps(col), {
-			x: round(polarToX(col.angle, opt.size / 2 * .95)),
-			y: round(polarToY(col.angle, opt.size / 2 * .95)),
+			x: polarToX(col.angle, opt.size / 2 * .95).toFixed(4),
+			y: polarToY(col.angle, opt.size / 2 * .95).toFixed(4),
 			dy: (opt.captionProps(col).fontSize || 2) / 2
 		}), col.caption);
 	};
@@ -176,7 +177,7 @@ var render = function render(columns, data) {
 		}groups.unshift(h('g', scales));
 	}
 	return h('g', {
-		transform: 'translate(' + round(opt.size / 2) + ',' + round(opt.size / 2) + ')'
+		transform: 'translate(' + (opt.size / 2).toFixed(4) + ',' + (opt.size / 2).toFixed(4) + ')'
 	}, groups);
 };
 

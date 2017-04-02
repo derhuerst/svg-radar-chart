@@ -15,13 +15,14 @@ const polarToY = (angle, distance) =>
 	Math.sin(angle - Math.PI / 2) * distance
 
 const points = (points) => points
-	.map((point) => round(point[0]) + ',' + round(point[1]))
+	.map((point) => point[0].toFixed(4) + ',' + point[1].toFixed(4))
 	.join(' ')
 
 const noSmoothing = (points) => {
-	let d = 'M' + round(points[0][0]) + ',' + round(points[0][1])
-	for (let i = 1; i < points.length; i++)
-		d += 'L' + round(points[i][0]) + ',' + round(points[i][1])
+	let d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4)
+	for (let i = 1; i < points.length; i++) {
+		d += 'L' + points[i][0].toFixed(4) + ',' + points[i][1].toFixed(4)
+	}
 	return d + 'z'
 }
 
@@ -52,8 +53,8 @@ const scale = (opt, value) =>
 
 const caption = (opt) => (col) =>
 	h('text', Object.assign(opt.captionProps(col), {
-		x: round(polarToX(col.angle, opt.size / 2 * .95)),
-		y: round(polarToY(col.angle, opt.size / 2 * .95)),
+		x: polarToX(col.angle, opt.size / 2 * .95).toFixed(4),
+		y: polarToY(col.angle, opt.size / 2 * .95).toFixed(4),
 		dy: (opt.captionProps(col).fontSize || 2) / 2
 	}), col.caption)
 
@@ -106,7 +107,7 @@ const render = (columns, data, opt = {}) => {
 		groups.unshift(h('g', scales))
 	}
 	return h('g', {
-		transform: `translate(${round(opt.size / 2)},${round(opt.size / 2)})`
+		transform: `translate(${(opt.size / 2).toFixed(4)},${(opt.size / 2).toFixed(4)})`
 	}, groups)
 }
 
