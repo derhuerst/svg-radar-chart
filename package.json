@@ -22,7 +22,7 @@
 		"browserify": "^14.1.0",
 		"babelify": "^7.3",
 		"babel-preset-es2015": "^6.18",
-		"uglify-js": "^2.7.4"
+		"uglify-js": "^3.0.0"
 	},
 	"scripts": {
 		"bundle": "browserify -g [ babelify --presets es2015 ] docs/index.js > docs/bundle.js",
