@@ -1,11 +1,13 @@
 {
 	"name": "svg-radar-chart",
 	"description": "A reusable radar chart in SVG.",
-	"version": "0.1.1",
-	"main": "index.js",
+	"version": "0.2.0",
+	"main": "dist/index.js",
+	"module": "index.js",
 	"files": [
 		"index.js",
-		"smoothing.js"
+		"smoothing.js",
+		"dist"
 	],
 	"keywords": [
 		"svg",
@@ -27,17 +29,19 @@
 		"virtual-dom": "^2.1.1"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
 		"babel-preset-env": "^1.6.0",
 		"babelify": "^7.3",
 		"browserify": "^14.1.0",
 		"safe-eval": "^0.3",
-		"uglify-es": "^3.1.1",
+		"uglifyify": "^4.0.3",
 		"virtual-dom-stringify": "^3.0.1"
 	},
 	"scripts": {
-		"bundle": "browserify -g [ babelify --presets env ] docs/index.js > docs/bundle.js",
-		"minify": "uglifyjs -mc --screw-ie8 -- docs/bundle.js > docs/bundle.min.js",
-		"build": "npm run bundle && npm run minify",
-		"dev": "browserify docs/index.js > docs/bundle.min.js"
+		"code-build": "babel --presets env -d dist index.js smoothing.js",
+		"docs-build": "browserify -g [ babelify --presets env ] -g uglifyify docs/index.js > docs/bundle.min.js",
+		"docs-dev": "browserify docs/index.js > docs/bundle.min.js",
+		"build": "npm run code-build && npm run docs-build",
+		"prepublishOnly": "npm run code-build"
 	}
 }
