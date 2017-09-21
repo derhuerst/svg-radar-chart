@@ -1322,15 +1322,14 @@ var LANGUAGES = {
       '\u0128': 'i\u0307\u0303'
     }
   }
-};
 
-/**
- * Lowercase a string.
- *
- * @param  {String} str
- * @return {String}
- */
-module.exports = function (str, locale) {
+  /**
+   * Lowercase a string.
+   *
+   * @param  {String} str
+   * @return {String}
+   */
+};module.exports = function (str, locale) {
   var lang = LANGUAGES[locale];
 
   str = str == null ? '' : String(str);
