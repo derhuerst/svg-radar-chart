@@ -90,18 +90,23 @@ var noSmoothing = function noSmoothing(points) {
 };
 
 var axis = function axis(opt) {
-	return function (column) {
-		return h('polyline', Object.assign(opt.axisProps(column), {
-			points: points([[0, 0], [polarToX(column.angle, opt.chartSize / 2), polarToY(column.angle, opt.chartSize / 2)]])
+	return function (col) {
+		return h('polyline', Object.assign(opt.axisProps(col), {
+			points: points([[0, 0], [polarToX(col.angle, opt.chartSize / 2), polarToY(col.angle, opt.chartSize / 2)]])
 		}));
 	};
 };
 
 var shape = function shape(columns, opt) {
-	return function (data) {
+	return function (data, i) {
 		return h('path', Object.assign(opt.shapeProps(data), {
 			d: opt.smoothing(columns.map(function (col) {
-				return [polarToX(col.angle, data[col.key] * opt.chartSize / 2), polarToY(col.angle, data[col.key] * opt.chartSize / 2)];
+				var val = data[col.key];
+				if ('number' !== typeof val) {
+					throw new Error('Data set ' + i + ' is invalid.');
+				}
+
+				return [polarToX(col.angle, val * opt.chartSize / 2), polarToY(col.angle, val * opt.chartSize / 2)];
 			}))
 		}));
 	};
@@ -151,8 +156,12 @@ var defaults = {
 var render = function render(columns, data) {
 	var opt = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-	if ('object' !== (typeof columns === 'undefined' ? 'undefined' : _typeof(columns)) || Array.isArray(columns)) throw new Error('columns must be an object');
-	if (!Array.isArray(data)) throw new Error('data must be an array');
+	if ('object' !== (typeof columns === 'undefined' ? 'undefined' : _typeof(columns)) || Array.isArray(columns)) {
+		throw new Error('columns must be an object');
+	}
+	if (!Array.isArray(data)) {
+		throw new Error('data must be an array');
+	}
 	opt = Object.assign({}, defaults, opt);
 	opt.chartSize = opt.size / opt.captionsPosition;
 
@@ -162,10 +171,6 @@ var render = function render(columns, data) {
 			angle: Math.PI * 2 * i / all.length
 		};
 	});
-	columns.reduce(function (all, column) {
-		all[column.key] = column;
-		return all;
-	}, columns);
 
 	var groups = [h('g', data.map(shape(columns, opt)))];
 	if (opt.captions) groups.push(h('g', columns.map(caption(opt))));
@@ -174,10 +179,13 @@ var render = function render(columns, data) {
 		var scales = [];
 		for (var i = opt.scales; i > 0; i--) {
 			scales.push(scale(opt, i / opt.scales));
-		}groups.unshift(h('g', scales));
+		}
+		groups.unshift(h('g', scales));
 	}
+
+	var delta = (opt.size / 2).toFixed(4);
 	return h('g', {
-		transform: 'translate(' + (opt.size / 2).toFixed(4) + ',' + (opt.size / 2).toFixed(4) + ')'
+		transform: 'translate(' + delta + ',' + delta + ')'
 	}, groups);
 };
 
