@@ -37,12 +37,19 @@ const axis = (opt) => (col) => {
 	}))
 }
 
-const shape = (columns, opt) => (data) => {
+const shape = (columns, opt) => (data, i) => {
 	return h('path', Object.assign(opt.shapeProps(data), {
-		d: opt.smoothing(columns.map((col) => [
-			polarToX(col.angle, data[col.key] * opt.chartSize / 2),
-			polarToY(col.angle, data[col.key] * opt.chartSize / 2)
-		]))
+		d: opt.smoothing(columns.map((col) => {
+			const val = data[col.key]
+			if ('number' !== typeof val) {
+				throw new Error(`Data set ${i} is invalid.`)
+			}
+
+			return [
+				polarToX(col.angle, val * opt.chartSize / 2),
+				polarToY(col.angle, val * opt.chartSize / 2)
+			]
+		}))
 	}))
 }
 
@@ -89,15 +96,10 @@ const render = (columns, data, opt = {}) => {
 	opt = Object.assign({}, defaults, opt)
 	opt.chartSize = opt.size / opt.captionsPosition
 
-	columns = Object.keys(columns)
-		.map((key, i, all) => ({
-			key, caption: columns[key],
-			angle: Math.PI * 2 * i / all.length
-		}))
-	columns.reduce((all, column) => {
-		all[column.key] = column
-		return all
-	}, columns)
+	columns = Object.keys(columns).map((key, i, all) => ({
+		key, caption: columns[key],
+		angle: Math.PI * 2 * i / all.length
+	}))
 
 	const groups = [
 		h('g', data.map(shape(columns, opt)))
