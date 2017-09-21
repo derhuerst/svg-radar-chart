@@ -2,21 +2,19 @@
 
 const h = require('virtual-dom/h')
 
-
-
 // helpers
 
-const round = (v) => Math.round(v * 10000) / 10000
+const round = v => Math.round(v * 10000) / 10000
 
-const polarToX = (angle, distance) =>
-	Math.cos(angle - Math.PI / 2) * distance
+const polarToX = (angle, distance) => Math.cos(angle - Math.PI / 2) * distance
 
-const polarToY = (angle, distance) =>
-	Math.sin(angle - Math.PI / 2) * distance
+const polarToY = (angle, distance) => Math.sin(angle - Math.PI / 2) * distance
 
-const points = (points) => points
-	.map((point) => point[0].toFixed(4) + ',' + point[1].toFixed(4))
+const points = (points) => {
+	return points
+	.map(point => point[0].toFixed(4) + ',' + point[1].toFixed(4))
 	.join(' ')
+}
 
 const noSmoothing = (points) => {
 	let d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4)
@@ -28,35 +26,39 @@ const noSmoothing = (points) => {
 
 
 
-const axis = (opt) => (column) =>
-	h('polyline', Object.assign(opt.axisProps(column), {
+const axis = (opt) => (col) => {
+	return h('polyline', Object.assign(opt.axisProps(col), {
 		points: points([
 			[0, 0], [
-				polarToX(column.angle, opt.chartSize / 2),
-				polarToY(column.angle, opt.chartSize / 2)
+				polarToX(col.angle, opt.chartSize / 2),
+				polarToY(col.angle, opt.chartSize / 2)
 			]
 		])
 	}))
+}
 
-const shape = (columns, opt) => (data) =>
-	h('path', Object.assign(opt.shapeProps(data), {
+const shape = (columns, opt) => (data) => {
+	return h('path', Object.assign(opt.shapeProps(data), {
 		d: opt.smoothing(columns.map((col) => [
 			polarToX(col.angle, data[col.key] * opt.chartSize / 2),
 			polarToY(col.angle, data[col.key] * opt.chartSize / 2)
 		]))
 	}))
+}
 
-const scale = (opt, value) =>
-	h('circle', Object.assign(opt.scaleProps(value), {
+const scale = (opt, value) => {
+	return h('circle', Object.assign(opt.scaleProps(value), {
 		cx: 0, cy: 0, r: value * opt.chartSize / 2
 	}))
+}
 
-const caption = (opt) => (col) =>
-	h('text', Object.assign(opt.captionProps(col), {
+const caption = (opt) => (col) => {
+	return h('text', Object.assign(opt.captionProps(col), {
 		x: polarToX(col.angle, opt.size / 2 * .95).toFixed(4),
 		y: polarToY(col.angle, opt.size / 2 * .95).toFixed(4),
 		dy: (opt.captionProps(col).fontSize || 2) / 2
 	}), col.caption)
+}
 
 
 
@@ -78,10 +80,12 @@ const defaults = {
 }
 
 const render = (columns, data, opt = {}) => {
-	if ('object' !== typeof columns || Array.isArray(columns))
+	if ('object' !== typeof columns || Array.isArray(columns)) {
 		throw new Error('columns must be an object')
-	if (!Array.isArray(data))
+	}
+	if (!Array.isArray(data)) {
 		throw new Error('data must be an array')
+	}
 	opt = Object.assign({}, defaults, opt)
 	opt.chartSize = opt.size / opt.captionsPosition
 
@@ -102,12 +106,15 @@ const render = (columns, data, opt = {}) => {
 	if (opt.axes) groups.unshift(h('g', columns.map(axis(opt))))
 	if (opt.scales > 0) {
 		const scales = []
-		for (let i = opt.scales; i > 0; i--)
+		for (let i = opt.scales; i > 0; i--) {
 			scales.push(scale(opt, i / opt.scales))
+		}
 		groups.unshift(h('g', scales))
 	}
+
+	const delta = (opt.size / 2).toFixed(4)
 	return h('g', {
-		transform: `translate(${(opt.size / 2).toFixed(4)},${(opt.size / 2).toFixed(4)})`
+		transform: `translate(${delta},${delta})`
 	}, groups)
 }
 
