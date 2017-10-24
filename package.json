@@ -30,6 +30,7 @@
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.0",
 		"babel-preset-env": "^1.6.0",
 		"babelify": "^8.0.0",
 		"browserify": "^14.1.0",
