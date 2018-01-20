@@ -1,6 +1,6 @@
 # [svg-radar-chart](http://jannisr.de/svg-radar-chart/)
 
-**A reusable radar chart in SVG.**
+**Generate SVG radar charts.** Note that this is an opinionated tool; I maintain it with my personal use cases in mind. It does *not* intend to cover every feature a radar chart library might possibly need.
 
 ![an example](https://rawgit.com/derhuerst/svg-radar-chart/master/example.svg)
 
@@ -15,7 +15,7 @@ This library is inspired by [radar-chart-d3](https://github.com/alangrafu/radar-
 
 - `svg-radar-chart` does not limit you in which frontend stack you use. It just returns [virtual-dom nodes](https://github.com/Matt-Esch/virtual-dom#dom-model).
 - Because [radar-chart-d3](https://github.com/alangrafu/radar-chart-d3) includes [D3](https://d3js.org/), it weighs `212k`. `svg-radar-chart` weighs `9k`.
-
+- Because [angular-radial-plot](https://github.com/colorfulgrayscale/angular-radial-plot) includes includes [D3](https://d3js.org/), it weighs roughly `160k`. `svg-radar-chart` weighs `9k`.
 
 ## Installing
 
