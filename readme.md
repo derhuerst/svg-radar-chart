@@ -1,4 +1,4 @@
-# [svg-radar-chart](http://jannisr.de/svg-radar-chart/)
+# [svg-radar-chart](https://derhuerst.github.io/svg-radar-chart/)
 
 **Generate SVG radar charts.** Note that this is an opinionated tool; I maintain it with my personal use cases in mind. It does *not* intend to cover every feature a radar chart library might possibly need.
 
@@ -10,6 +10,7 @@
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/svg-radar-chart.svg)](https://david-dm.org/derhuerst/svg-radar-chart#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/svg-radar-chart.svg)
 [![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
+[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
 
 This library is inspired by [radar-chart-d3](https://github.com/alangrafu/radar-chart-d3) but tries to do a few things differently:
 
@@ -82,7 +83,7 @@ Or insert it into the DOM:
 document.querySelector('#my-chart').innerHTML = svg
 ```
 
-Check [the website](http://jannisr.de/svg-radar-chart/) or [the example](example.js) on how to customize charts further.
+Check [the website](https://derhuerst.github.io/svg-radar-chart/) or [the example](example.js) on how to customize charts further.
 
 ### Smoothing
 
