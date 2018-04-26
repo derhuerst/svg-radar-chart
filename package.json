@@ -35,7 +35,7 @@
 		"babelify": "^8.0.0",
 		"browserify": "^16.0.0",
 		"safe-eval": "^0.3",
-		"uglifyify": "^4.0.3",
+		"uglifyify": "^5.0.0",
 		"virtual-dom-stringify": "^3.0.1"
 	},
 	"scripts": {
