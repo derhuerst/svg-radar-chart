@@ -77,13 +77,17 @@ You may now create an SVG file using Node.js:
 process.stdout.write(svg)
 ```
 
+```shell
+node generate-chart.js >chart.svg
+```
+
 Or insert it into the DOM:
 
 ```js
 document.querySelector('#my-chart').innerHTML = svg
 ```
 
-Check [the website](https://derhuerst.github.io/svg-radar-chart/) or [the example](example.js) on how to customize charts further.
+**Check [the website](https://derhuerst.github.io/svg-radar-chart/) or [the example](example.js) on how to customize charts further.**
 
 ### Smoothing
 
