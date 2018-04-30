@@ -2,10 +2,10 @@
 
 // https://github.com/d3/d3-shape/blob/04f60b8/test/curve/cardinalClosed-test.js#L11
 
-const line = require('d3-shape/src/line').default
-const cardinal = require('d3-shape/src/curve/cardinalClosed').default
+const {line, curveCardinalClosed} = require('d3-shape')
 
-const points = (tension = .3) => (points) =>
-	line().curve(cardinal.tension(tension))(points)
+const points = (tension = .3) => (points) => {
+	return line().curve(curveCardinalClosed.tension(tension))(points)
+}
 
 module.exports = points

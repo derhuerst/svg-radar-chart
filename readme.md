@@ -91,7 +91,7 @@ document.querySelector('#my-chart').innerHTML = svg
 
 ### Smoothing
 
-You can pass the [cardinal-closed smoothing function](https://github.com/d3/d3-shape/blob/master/README.md#curveCardinalClosed) as follows, but it will add another `14k` to your bundle.
+You can pass the [cardinal-closed smoothing function](https://github.com/d3/d3-shape/blob/master/README.md#curveCardinalClosed) as follows, but it will add another `18k` to your bundle, if you use [`common-shakeify`](https://www.npmjs.com/package/common-shakeify), otherwise a bit more.
 
 ```js
 const smoothing = require('svg-radar-chart/smoothing')
