@@ -34,14 +34,16 @@
 		"babel-preset-env": "^1.6.0",
 		"babelify": "^8.0.0",
 		"browserify": "^16.0.0",
+		"common-shakeify": "^0.4.6",
+		"envify": "^4.1.0",
 		"safe-eval": "^0.3",
-		"uglifyify": "^5.0.0",
+		"uglify-es": "^3.3.9",
 		"virtual-dom-stringify": "^3.0.1"
 	},
 	"scripts": {
 		"code-build": "babel --presets env -d dist index.js smoothing.js",
-		"docs-build": "browserify -g [ babelify --presets env ] -g uglifyify docs/index.js > docs/bundle.min.js",
-		"docs-dev": "browserify docs/index.js > docs/bundle.min.js",
+		"docs-build": "env NODE_ENV=production browserify -p common-shakeify -g [ babelify --presets env ] -g envify docs/index.js | uglifyjs -mc > docs/bundle.min.js",
+		"docs-dev": "env NODE_ENV=dev browserify docs/index.js > docs/bundle.min.js",
 		"build": "npm run code-build && npm run docs-build",
 		"prepublishOnly": "npm run code-build"
 	}
