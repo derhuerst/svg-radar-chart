@@ -1,7 +1,7 @@
 {
 	"name": "svg-radar-chart",
 	"description": "A reusable radar chart in SVG.",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"main": "dist/index.js",
 	"module": "index.js",
 	"files": [
