@@ -2,7 +2,7 @@
 
 **Generate SVG radar charts.**
 
-![an example](https://rawgit.com/derhuerst/svg-radar-chart/master/example.svg)
+![an example](example.svg)
 
 [![npm version](https://img.shields.io/npm/v/svg-radar-chart.svg)](https://www.npmjs.com/package/svg-radar-chart)
 [![build status](https://img.shields.io/travis/derhuerst/svg-radar-chart.svg)](https://travis-ci.org/derhuerst/svg-radar-chart)
