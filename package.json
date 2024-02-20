@@ -2,12 +2,10 @@
 	"name": "svg-radar-chart",
 	"description": "A reusable radar chart in SVG.",
 	"version": "0.2.3",
-	"main": "dist/index.js",
-	"module": "index.js",
+	"main": "index.js",
 	"files": [
 		"index.js",
-		"smoothing.js",
-		"dist"
+		"smoothing.js"
 	],
 	"keywords": [
 		"svg",
@@ -29,7 +27,6 @@
 		"virtual-dom": "^2.1.1"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.23.9",
 		"@babel/core": "^7.23.9",
 		"@babel/preset-env": "^7.23.9",
 		"babelify": "^10.0.0",
@@ -41,10 +38,9 @@
 		"virtual-dom-stringify": "^3.0.1"
 	},
 	"scripts": {
-		"code-build": "babel --presets @babel/preset-env -d dist index.js smoothing.js",
 		"docs-build": "env NODE_ENV=production browserify -p common-shakeify -g [ babelify --presets [ @babel/preset-env ] ] -g envify docs/index.js | uglifyjs -mc > docs/bundle.min.js",
 		"docs-dev": "env NODE_ENV=dev browserify docs/index.js > docs/bundle.min.js",
-		"build": "npm run code-build && npm run docs-build",
-		"prepublishOnly": "npm run code-build"
+		"build": "npm run docs-build",
+		"prepublishOnly": "echo todo"
 	}
 }

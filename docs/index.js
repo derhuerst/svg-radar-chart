@@ -2,8 +2,8 @@
 
 const safeEval = require('safe-eval')
 const toHTML = require('virtual-dom-stringify')
-const radar = require('../dist')
-const smoothing = require('../dist/smoothing')
+const radar = require('..')
+const smoothing = require('../smoothing')
 
 
 
