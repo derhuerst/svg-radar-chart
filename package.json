@@ -32,7 +32,6 @@
 		"@babel/preset-env": "^7.23.9",
 		"babelify": "^10.0.0",
 		"browserify": "^17.0.0",
-		"common-shakeify": "^1.1.2",
 		"envify": "^4.1.0",
 		"eslint": "^8.56.0",
 		"safe-eval": "^0.4.1",
@@ -41,7 +40,7 @@
 	},
 	"scripts": {
 		"lint": "eslint .",
-		"docs-build": "env NODE_ENV=production browserify -p common-shakeify -g [ babelify --presets [ @babel/preset-env ] ] -g envify docs/index.js | uglifyjs -mc > docs/bundle.min.js",
+		"docs-build": "env NODE_ENV=production browserify -g [ babelify --presets [ @babel/preset-env ] ] -g envify docs/index.js | uglifyjs -mc -o docs/bundle.min.js",
 		"docs-dev": "env NODE_ENV=dev browserify docs/index.js > docs/bundle.min.js",
 		"build": "npm run docs-build",
 		"prepublishOnly": "npm run lint"
