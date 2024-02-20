@@ -104,8 +104,8 @@ radar(columns, data, {
 
 ## API
 
-```
-radar(columns, data, [opt])
+```js
+radar(columns, data, opt = {})
 ```
 
 `columns` must be an object. The values are captions.
