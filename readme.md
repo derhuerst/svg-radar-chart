@@ -28,7 +28,7 @@ npm install svg-radar-chart
 ## Usage
 
 ```js
-const radar = require('svg-radar-chart')
+import {radar} from 'svg-radar-chart'
 
 const chart = radar({
 	// columns
@@ -48,7 +48,7 @@ const chart = radar({
 To generate an SVG string from it, use [virtual-dom-stringify](https://github.com/alexmingoia/virtual-dom-stringify):
 
 ```js
-const stringify = require('virtual-dom-stringify')
+import stringify from 'virtual-dom-stringify'
 
 const svg = `
 <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -94,7 +94,8 @@ document.querySelector('#my-chart').innerHTML = svg
 You can pass the [cardinal-closed smoothing function](https://github.com/d3/d3-shape/blob/master/README.md#curveCardinalClosed) as follows, but it will add another `18k` to your bundle, if you use [`common-shakeify`](https://www.npmjs.com/package/common-shakeify), otherwise a bit more.
 
 ```js
-const smoothing = require('svg-radar-chart/smoothing')
+import {smoothing} from 'svg-radar-chart/smoothing.js'
+
 radar(columns, data, {
 	smoothing: smoothing(.3) // tension of .3
 })

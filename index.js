@@ -1,6 +1,4 @@
-'use strict'
-
-const h = require('virtual-dom/h')
+import h from 'virtual-dom/h.js'
 
 // helpers
 
@@ -86,7 +84,7 @@ const defaults = {
 	})
 }
 
-const render = (columns, data, opt = {}) => {
+const renderRadarChart = (columns, data, opt = {}) => {
 	if ('object' !== typeof columns || Array.isArray(columns)) {
 		throw new Error('columns must be an object')
 	}
@@ -120,4 +118,6 @@ const render = (columns, data, opt = {}) => {
 	}, groups)
 }
 
-module.exports = render
+export {
+	renderRadarChart as radar,
+}

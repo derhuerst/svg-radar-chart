@@ -1,7 +1,5 @@
-'use strict'
-
-const radar = require('.')
-const stringify = require('virtual-dom-stringify')
+import stringify from 'virtual-dom-stringify'
+import {radar} from './index.js'
 
 const chart = radar({
 	// columns

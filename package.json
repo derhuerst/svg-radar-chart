@@ -2,6 +2,7 @@
 	"name": "svg-radar-chart",
 	"description": "A reusable radar chart in SVG.",
 	"version": "0.2.3",
+	"type": "module",
 	"main": "index.js",
 	"files": [
 		"index.js",
@@ -20,7 +21,7 @@
 	"bugs": "https://github.com/derhuerst/svg-radar-chart/issues",
 	"license": "ISC",
 	"engines": {
-		"node": ">=6"
+		"node": ">=20"
 	},
 	"dependencies": {
 		"d3-shape": "^1.0.3",

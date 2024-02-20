@@ -1,9 +1,7 @@
-'use strict'
-
-const safeEval = require('safe-eval')
-const toHTML = require('virtual-dom-stringify')
-const radar = require('..')
-const smoothing = require('../smoothing')
+import safeEval from 'safe-eval'
+import toHTML from 'virtual-dom-stringify'
+import {radar} from '../index.js'
+import {smoothing} from '../smoothing.js'
 
 
 
