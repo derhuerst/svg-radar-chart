@@ -34,12 +34,12 @@ const chart = radar({
 	// columns
 	battery: 'Battery Capacity',
 	design: 'Design',
-	useful: 'Usefulness'
+	useful: 'Usefulness',
 }, [
 	// data
 	{class: 'iphone', battery: .7, design:  1, useful: .9},
 	{class: 'galaxy', battery:  1, design: .6, useful: .8},
-	{class: 'nexus',  battery: .8, design: .7, useful: .6}
+	{class: 'nexus',  battery: .8, design: .7, useful: .6},
 ])
 ```
 
@@ -97,7 +97,7 @@ You can pass the [cardinal-closed smoothing function](https://github.com/d3/d3-s
 import {smoothing} from 'svg-radar-chart/smoothing.js'
 
 radar(columns, data, {
-	smoothing: smoothing(.3) // tension of .3
+	smoothing: smoothing(.3), // tension of .3
 })
 ```
 
@@ -128,8 +128,8 @@ const defaults = {
 	captionProps: () => ({
 		className: 'caption',
 		textAnchor: 'middle', fontSize: 3,
-		fontFamily: 'sans-serif'
-	})
+		fontFamily: 'sans-serif',
+	}),
 }
 ```
 

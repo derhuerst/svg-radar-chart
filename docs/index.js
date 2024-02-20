@@ -11,14 +11,6 @@ const scales = document.querySelector('#demo-scales')
 const axes = document.querySelector('#demo-axes')
 const tension = document.querySelector('#demo-smoothing')
 
-const opt = {
-	shapeProps: (data) => ({
-		className: 'shape',
-		fill: data.color,
-		stroke: data.color
-	})
-}
-
 const render = () => {
 	const c = safeEval(columns.value)
 	const d = safeEval(data.value)

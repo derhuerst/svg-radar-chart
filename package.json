@@ -34,14 +34,16 @@
 		"browserify": "^16.0.0",
 		"common-shakeify": "^0.6.0",
 		"envify": "^4.1.0",
+		"eslint": "^8.56.0",
 		"safe-eval": "^0.4.1",
 		"uglify-es": "^3.3.9",
 		"virtual-dom-stringify": "^3.0.1"
 	},
 	"scripts": {
+		"lint": "eslint .",
 		"docs-build": "env NODE_ENV=production browserify -p common-shakeify -g [ babelify --presets [ @babel/preset-env ] ] -g envify docs/index.js | uglifyjs -mc > docs/bundle.min.js",
 		"docs-dev": "env NODE_ENV=dev browserify docs/index.js > docs/bundle.min.js",
 		"build": "npm run docs-build",
-		"prepublishOnly": "echo todo"
+		"prepublishOnly": "npm run lint"
 	}
 }

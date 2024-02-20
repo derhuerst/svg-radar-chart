@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import stringify from 'virtual-dom-stringify'
 import {radar} from './index.js'
 

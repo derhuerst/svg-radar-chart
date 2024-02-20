@@ -2,8 +2,6 @@ import h from 'virtual-dom/h.js'
 
 // helpers
 
-const round = v => Math.round(v * 10000) / 10000
-
 const polarToX = (angle, distance) => Math.cos(angle - Math.PI / 2) * distance
 
 const polarToY = (angle, distance) => Math.sin(angle - Math.PI / 2) * distance
