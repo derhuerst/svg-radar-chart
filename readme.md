@@ -5,12 +5,10 @@
 ![an example](example.svg)
 
 [![npm version](https://img.shields.io/npm/v/svg-radar-chart.svg)](https://www.npmjs.com/package/svg-radar-chart)
-[![build status](https://img.shields.io/travis/derhuerst/svg-radar-chart.svg)](https://travis-ci.org/derhuerst/svg-radar-chart)
-[![dependency status](https://img.shields.io/david/derhuerst/svg-radar-chart.svg)](https://david-dm.org/derhuerst/svg-radar-chart)
-[![dev dependency status](https://img.shields.io/david/dev/derhuerst/svg-radar-chart.svg)](https://david-dm.org/derhuerst/svg-radar-chart#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/svg-radar-chart.svg)
-[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
-[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
+![minimum Node.js version](https://img.shields.io/node/v/svg-radar-chart.svg)
+[![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
+[![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
 This library is inspired by [radar-chart-d3](https://github.com/alangrafu/radar-chart-d3) but tries to do a few things differently:
 
