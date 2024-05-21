@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-env node */
 
 import stringify from 'virtual-dom-stringify'
@@ -41,6 +42,6 @@ process.stdout.write(`
 		.shape.nexus  { fill: #cc333f; stroke: #cc333f; }
 		.shape.galaxy { fill: #00a0b0; stroke: #00a0b0; }
 	</style>
-	${stringify(chart)}
+	${stringify(chart, undefined)}
 </svg>
 `)

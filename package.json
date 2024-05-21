@@ -36,7 +36,10 @@
 		"eslint": "^8.56.0",
 		"safe-eval": "^0.4.1",
 		"uglify-es": "^3.3.9",
-		"virtual-dom-stringify": "^3.0.1"
+		"virtual-dom-stringify": "^3.0.1",
+		"@types/d3-shape": "^1.0.3",
+		"@types/virtual-dom": "^2.1.1",
+		"@types/react": "^18.3.2"
 	},
 	"scripts": {
 		"lint": "eslint .",
