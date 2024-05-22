@@ -190,7 +190,7 @@ const renderRadarChart = (columnsData, data, opt = {}) => {
 	if (!Array.isArray(data)) {
 		throw new Error('data must be an array');
 	}
-	if (data.some(data => Object.keys(data).map(key => key !== 'class' && typeof data[key] !== 'number'))) {
+	if (data.some(data => Object.keys(data).some(key => key !== 'class' && typeof data[key] !== 'number'))) {
 		throw new Error('data must contain set of numbers');
 	}
 	const options = /** @type {ExtendedOptions<T>} */({ ...defaults, ...opt, chartSize: 0 });
