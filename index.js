@@ -57,7 +57,7 @@ import h from 'virtual-dom/h.js'
  * @param {number} distance - The distance from the origin.
  * @returns {number} The X coordinate.
  */
-const polarToX = (angle, distance) => Math.cos(angle - Math.PI / 2) * distance;
+const polarToX = (angle, distance) => Math.cos(angle - Math.PI / 2) * distance
 
 // Converts polar coordinates to Cartesian Y coordinate
 /**
@@ -65,7 +65,7 @@ const polarToX = (angle, distance) => Math.cos(angle - Math.PI / 2) * distance;
  * @param {number} distance - The distance from the origin.
  * @returns {number} The Y coordinate.
  */
-const polarToY = (angle, distance) => Math.sin(angle - Math.PI / 2) * distance;
+const polarToY = (angle, distance) => Math.sin(angle - Math.PI / 2) * distance
 
 // Converts an array of Points into a space-separated string for SVG paths
 /**
@@ -75,8 +75,8 @@ const polarToY = (angle, distance) => Math.sin(angle - Math.PI / 2) * distance;
 const points = (points) => {
 	return points
 		.map(point => point[0].toFixed(4) + ',' + point[1].toFixed(4))
-		.join(' ');
-};
+		.join(' ')
+}
 
 // Creates an SVG path data string with no smoothing (just straight lines)
 /**
@@ -84,12 +84,12 @@ const points = (points) => {
  * @returns {string} An SVG path data string.
  */
 const noSmoothing = (points) => {
-	let d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4);
+	let d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4)
 	for (let i = 1; i < points.length; i++) {
-		d += 'L' + points[i][0].toFixed(4) + ',' + points[i][1].toFixed(4);
+		d += 'L' + points[i][0].toFixed(4) + ',' + points[i][1].toFixed(4)
 	}
-	return d + 'z';
-};
+	return d + 'z'
+}
 
 // Returns a function that generates SVG polyline elements for each axis
 /**
@@ -101,11 +101,13 @@ const axis = (opt) => (col) => {
 	return h('polyline', Object.assign(opt.axisProps(col), {
 		points: points([
 			[0, 0],
-			[polarToX(col.angle, opt.chartSize / 2),
-			polarToY(col.angle, opt.chartSize / 2)]
+			[
+				polarToX(col.angle, opt.chartSize / 2),
+				polarToY(col.angle, opt.chartSize / 2)
+			]
 		])
-	}));
-};
+	}))
+}
 
 // Returns a function that generates SVG path elements for each data shape
 /**
@@ -117,18 +119,18 @@ const axis = (opt) => (col) => {
 const shape = (columns, opt) => (data, i) => {
 	return h('path', Object.assign(opt.shapeProps(data), {
 		d: opt.smoothing(columns.map((col) => {
-			const val = data[col.key];
+			const val = data[col.key]
 			if (typeof val !== 'number') {
-				throw new Error(`Data set ${i} is invalid.`);
+				throw new Error(`Data set ${i} is invalid.`)
 			}
 
 			return [
 				polarToX(col.angle, val * opt.chartSize / 2),
 				polarToY(col.angle, val * opt.chartSize / 2)
-			];
+			]
 		}))
-	}));
-};
+	}))
+}
 
 // Returns an SVG circle element for each scale
 /**
@@ -140,8 +142,8 @@ const shape = (columns, opt) => (data, i) => {
 const scale = (opt, value) => {
 	return h('circle', Object.assign(opt.scaleProps(value), {
 		cx: 0, cy: 0, r: value * opt.chartSize / 2
-	}));
-};
+	}))
+}
 
 // Returns a function that generates SVG text elements for each caption
 /**
@@ -154,8 +156,8 @@ const caption = (opt) => (col) => {
 		x: polarToX(col.angle, opt.size / 2 * 0.95).toFixed(4),
 		y: polarToY(col.angle, opt.size / 2 * 0.95).toFixed(4),
 		dy: (parseInt(opt.captionProps(col).fontSize + '') || 2) / 2
-	}), col.caption);
-};
+	}), col.caption)
+}
 
 // Default configuration options for the radar chart
 const defaults = /** @type {Options<string>} */ ({
@@ -165,15 +167,15 @@ const defaults = /** @type {Options<string>} */ ({
 	captions: true, // whether to show captions
 	captionsPosition: 1.2, // radial position of captions
 	smoothing: noSmoothing, // default smoothing function
-	axisProps: () => ({ className: 'axis' }), // default axis properties
-	scaleProps: () => ({ className: 'scale', fill: 'none' }), // default scale properties
-	shapeProps: () => ({ className: 'shape' }), // default shape properties
+	axisProps: () => ({className: 'axis'}), // default axis properties
+	scaleProps: () => ({className: 'scale', fill: 'none'}), // default scale properties
+	shapeProps: () => ({className: 'shape'}), // default shape properties
 	captionProps: () => ({ // default caption properties
 		className: 'caption',
 		textAnchor: 'middle', fontSize: 3,
 		fontFamily: 'sans-serif'
 	})
-});
+})
 
 // Main function to render the radar chart with given columns and data
 /**
@@ -185,42 +187,44 @@ const defaults = /** @type {Options<string>} */ ({
  */
 const renderRadarChart = (columnsData, data, opt = {}) => {
 	if (typeof columnsData !== 'object' || Array.isArray(columnsData)) {
-		throw new Error('columns must be an object');
+		throw new Error('columns must be an object')
 	}
 	if (!Array.isArray(data)) {
-		throw new Error('data must be an array');
+		throw new Error('data must be an array')
 	}
 	if (data.some(data => Object.keys(data).some(key => key !== 'class' && typeof data[key] !== 'number'))) {
-		throw new Error('data must contain set of numbers');
+		throw new Error('data must contain set of numbers')
 	}
-	const options = /** @type {ExtendedOptions<T>} */({ ...defaults, ...opt, chartSize: 0 });
-	options.chartSize = options.size / options.captionsPosition;
+	const options = /** @type {ExtendedOptions<T>} */({...defaults, ...opt, chartSize: 0})
+	options.chartSize = options.size / options.captionsPosition
 
 	const columns = /** @type {Column<T>[]} */ (Object.keys(columnsData).map((key, i, all) => ({
 		key, caption: columnsData[key],
 		angle: Math.PI * 2 * i / all.length
-	})));
+	})))
 
 	const groups = [
 		h('g', data.map(shape(columns, options)))
-	];
-	if (options.captions) groups.push(h('g', columns.map(caption(options))));
-	if (options.axes) groups.unshift(h('g', columns.map(axis(options))));
+	]
+	if (options.captions) groups.push(h('g', columns.map(caption(options))))
+	if (options.axes) groups.unshift(h('g', columns.map(axis(options))))
 	if (options.scales > 0) {
-		const scales = [];
+		const scales = []
 		for (let i = options.scales; i > 0; i--) {
-			scales.push(scale(options, i / options.scales));
+			scales.push(scale(options, i / options.scales))
 		}
-		groups.unshift(h('g', scales));
+		groups.unshift(h('g', scales))
 	}
 
-	const delta = (options.size / 2).toFixed(4);
+	const delta = (options.size / 2).toFixed(4)
 	return h('g', {
 		transform: `translate(${delta},${delta})`
-	}, groups);
-};
+	}, groups)
+}
 
 // Export the radar chart rendering function
 export {
 	renderRadarChart as radar,
-};
+}
+
+export * from './smoothing.js'
